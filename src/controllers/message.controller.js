@@ -7,12 +7,12 @@ import cloudinary from '../lib/cloudinary.js'
 export const getUsersForSidebar = async(req,res)=>{
 try {
     const loggedInUserId =req.user._id;
-    const filteredUsers = await User.find({_d:{$ne:loggedInUserId}}).select("-password")
+    const filteredUsers = await User.find({_id:{$ne:loggedInUserId}}).select("-password")
 
     res.status(200).json(filteredUsers)
 } catch (error) {
     console.log("Error in getUsersForSidebar ",error.message)
-    return res.status(500).json({message:"Internal server data"})
+    return res.status(500).json({message:"Internal server Error"})
   
 }
 }
@@ -31,7 +31,7 @@ export const getMessages=async(req,res)=>{
         res.status(200).json(messages)
     } catch (error) {
         console.log("Error in getMessage controller ",error.message)
-        return res.status(500).json({message:"Internal server data"})
+        return res.status(500).json({message:"Internal server Error"})
     }
 }
 
@@ -63,7 +63,7 @@ export const sendMessage =async(req,res)=>{
         res.status(201).json(newMessage);
     } catch (error) {
         console.log("Error in sendMessage controller ",error.message)
-        return res.status(500).json({message:"Internal server data"})
+        return res.status(500).json({message:"Internal server Error"})
     }
 
 }
